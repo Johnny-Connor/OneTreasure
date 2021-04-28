@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {    
     public float movementSpeed = 1f;
     public Vector2 movement;
+    public float Speed;
     public Rigidbody2D rigidbody;
     // Start is called before the first frame update
     void Start()
@@ -16,8 +17,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        Move();
+    }
+
+    void Move()
+    {
+        movement.x = Input.GetAxisRaw("Horizontal") * Speed;
+        movement.y = Input.GetAxisRaw("Vertical") * Speed;
     }
 
     void FixedUpdate() 
