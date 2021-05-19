@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,9 @@ namespace Cainos.PixelArtTopDown_Basic
 {
     public class TopDownCharacterController : MonoBehaviour
     {
+        [SerializeField]
         public float speed;
-
+        [SerializeField]
         private Animator animator;
 
         private void Start()
@@ -48,3 +50,4 @@ namespace Cainos.PixelArtTopDown_Basic
         }
     }
 }
+*/

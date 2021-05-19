@@ -1,34 +1,71 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
-{    
-    public float movementSpeed = 1f;
-    public Vector2 movement;
-    public float Speed;
-    public Rigidbody2D rigidbody;
-    // Start is called before the first frame update
+{
+    [SerializeField]
+    private int HP = 100;
+    [SerializeField]
+    private Sprite defeatSprite;
+    [SerializeField]
+    private float speed = 3;
+    [SerializeField]
+    private Animator animator;
     void Start()
     {
-        rigidbody = this.GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Move();
+        Vector2 dir = Vector2.zero;
+        if (Input.GetKey(KeyCode.A))
+        {
+            dir.x = -1;
+            animator.SetInteger("Direction", 3);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            dir.x = 1;
+            animator.SetInteger("Direction", 2);
+        }
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            dir.y = 1;
+            animator.SetInteger("Direction", 1);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            dir.y = -1;
+            animator.SetInteger("Direction", 0);
+        }
+
+        dir.Normalize();
+        animator.SetBool("IsMoving", dir.magnitude > 0);
+
+        GetComponent<Rigidbody2D>().velocity = speed * dir;
+
+        if (HP <= 0)
+        {
+            StartCoroutine(defeat());
+        }
     }
 
-    void Move()
+    public IEnumerator defeat()
     {
-        movement.x = Input.GetAxisRaw("Horizontal") * Speed;
-        movement.y = Input.GetAxisRaw("Vertical") * Speed;
+        this.GetComponent<Animator>().enabled = false;
+        this.GetComponent<SpriteRenderer>().sprite = defeatSprite;
+        speed = 0;
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    void FixedUpdate() 
+    public int getHP()
     {
-        rigidbody.MovePosition(rigidbody.position + movement * movementSpeed * Time.fixedDeltaTime);
+        return HP;
     }
 
 }
