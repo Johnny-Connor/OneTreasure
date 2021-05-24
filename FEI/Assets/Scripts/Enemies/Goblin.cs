@@ -19,7 +19,9 @@ public class Goblin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(HP <= 0){
+            Destroy(this.gameObject);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -31,7 +33,7 @@ public class Goblin : MonoBehaviour
         }
         else if (col.gameObject.tag == "FurBall")
         {
-            HP -= player.getDMG();
+            HP -= DMG;
         }
     }
 }
