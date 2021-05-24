@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private int HP = 100;
-    [SerializeField]
     private Sprite defeatSprite;
     [SerializeField]
-    private float speed = 3;
+    private int HP = 100;
+    [SerializeField]
+    private int DMG = 10;
+    [SerializeField]
+    private float SPD = 3;
     [SerializeField]
     private Animator animator;
     void Start()
@@ -21,32 +23,35 @@ public class Player : MonoBehaviour
     void Update()
     {
         Vector2 dir = Vector2.zero;
-        if (Input.GetKey(KeyCode.A))
+        if (Time.timeScale == 1)
         {
-            dir.x = -1;
-            animator.SetInteger("Direction", 3);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            dir.x = 1;
-            animator.SetInteger("Direction", 2);
-        }
+            if (Input.GetKey(KeyCode.A))
+            {
+                dir.x = -1;
+                animator.SetInteger("Direction", 3);
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                dir.x = 1;
+                animator.SetInteger("Direction", 2);
+            }
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            dir.y = 1;
-            animator.SetInteger("Direction", 1);
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            dir.y = -1;
-            animator.SetInteger("Direction", 0);
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                dir.y = 1;
+                animator.SetInteger("Direction", 1);
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                dir.y = -1;
+                animator.SetInteger("Direction", 0);
+            }
 
-        dir.Normalize();
-        animator.SetBool("IsMoving", dir.magnitude > 0);
+            dir.Normalize();
+            animator.SetBool("IsMoving", dir.magnitude > 0);
 
-        GetComponent<Rigidbody2D>().velocity = speed * dir;
+            GetComponent<Rigidbody2D>().velocity = SPD * dir;
+        }
 
         if (HP <= 0)
         {
@@ -58,7 +63,7 @@ public class Player : MonoBehaviour
     {
         this.GetComponent<Animator>().enabled = false;
         this.GetComponent<SpriteRenderer>().sprite = defeatSprite;
-        speed = 0;
+        SPD = 0;
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
@@ -66,6 +71,15 @@ public class Player : MonoBehaviour
     public int getHP()
     {
         return HP;
+    }
+
+    public void setHP(int value)
+    {
+        HP = value;
+    }
+    public int getDMG()
+    {
+        return DMG;
     }
 
 }
