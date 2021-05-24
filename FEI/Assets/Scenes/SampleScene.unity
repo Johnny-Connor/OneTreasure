@@ -11872,7 +11872,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.030000031, y: -0.2903427, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 0.9502581, z: 1}
   m_Children:
   - {fileID: 1700475605}
@@ -14458,7 +14458,15 @@ MonoBehaviour:
   HP: 100
   DMG: 10
   SPD: 3
+  fireRate: 0.35
   animator: {fileID: 0}
+  furBallW: {fileID: 5496543924248843710, guid: b921224dc250b8848a15181142fd25ca,
+    type: 3}
+  furBallA: {fileID: 3647534560247823228, guid: 206953f9f72ad9545b054321b3e441b3,
+    type: 3}
+  furBallS: {fileID: 8150324727418797218, guid: bcb94f294d15f464392d12baad3b9440,
+    type: 3}
+  furBallD: {fileID: 623182658641994930, guid: f02a5add63dc4bb4c8ec677b0005dca8, type: 3}
 --- !u!1001 &782832586
 PrefabInstance:
   m_ObjectHideFlags: 0
