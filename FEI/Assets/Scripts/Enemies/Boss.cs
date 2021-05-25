@@ -24,6 +24,11 @@ public class Boss : MonoBehaviour
         }
     }
 
+    public int getHP()
+    {
+        return HP;
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         Player player = col.transform.GetComponent<Player>();
@@ -33,7 +38,7 @@ public class Boss : MonoBehaviour
         }
         else if (col.gameObject.tag == "FurBall")
         {
-            HP -= DMG / 2;
+            HP -= 1000;
         }
     }
 }

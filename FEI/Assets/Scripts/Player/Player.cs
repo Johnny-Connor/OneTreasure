@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private GameObject furBallD;
     private float canFire = -0.001f;
     private Vector2 lastDir;
+    private bool boss;
 
     void Start()
     {
@@ -65,6 +66,10 @@ public class Player : MonoBehaviour
 
     public void movement()
     {
+        if (transform.position.x < -49)
+        {
+            boss = true;
+        }
         Vector2 dir = Vector2.zero;
         if (Time.timeScale == 1)
         {
@@ -76,8 +81,15 @@ public class Player : MonoBehaviour
 }
             else if (Input.GetKey(KeyCode.D))
             {
-                dir.x = 1;
-                animator.SetInteger("Direction", 2);
+                if (transform.position.x >= -49.3f && boss == true)
+                {
+                    dir.x = 0;
+                }
+                else
+                {
+                    dir.x = 1;
+                    animator.SetInteger("Direction", 2);
+                }
                 lastDir = new Vector2(1, 0);
             }
 
@@ -103,7 +115,7 @@ public class Player : MonoBehaviour
 
     public void shoot()
     {
-        if (Time.timeScale == 1)
+        if (Time.timeScale == 1 && HP > 0)
         {
             if (Input.GetButton("Fire1") && (Time.time > canFire))
             {

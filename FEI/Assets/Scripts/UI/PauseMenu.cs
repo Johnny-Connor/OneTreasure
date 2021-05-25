@@ -7,11 +7,15 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
     private GameObject pauseMenu;
+    [SerializeField]
+    private Player player;
+    [SerializeField]
+    private Boss boss;
 
     // Start is called before the first frame update
     void Start()
     {
-        pauseMenu.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -25,7 +29,7 @@ public class PauseMenu : MonoBehaviour
 
     public void pauseSwitch()
     {
-        if (Time.timeScale == 1)//rodando
+        if (Time.timeScale == 1 && player.getHP() > 0 && boss.getHP() > 0)//rodando e o player e o boss estiverem vivos
         {
             Time.timeScale = 0f;
             pauseMenu.SetActive(true);

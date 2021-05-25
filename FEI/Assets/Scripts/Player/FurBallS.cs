@@ -16,6 +16,7 @@ public class FurBallS : MonoBehaviour
     void Update()
     {
         GetComponent<Rigidbody2D>().velocity = ballSPD * new Vector2(0, -1);
+        Destroy(gameObject, 0.3f);
     }
 
     void OnCollisionEnter2D(Collision2D col)
