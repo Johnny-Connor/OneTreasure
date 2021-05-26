@@ -5,15 +5,17 @@ using UnityEngine;
 public class Goblin : MonoBehaviour
 {
     [SerializeField]
-    private int HP = 50;
+    private int HP;
     [SerializeField]
-    private int DMG = 15;
+    private int DMG;
     [SerializeField]
-    private float SPD = 5;
+    private float SPD;
+    [SerializeField]
+    private Player player;
     // Start is called before the first frame update
     void Start()
     {
-
+        DetectDif(PlayerPrefs.GetInt("dif"));
     }
 
     // Update is called once per frame
@@ -26,14 +28,36 @@ public class Goblin : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Player player = col.transform.GetComponent<Player>();
+        //Player player = col.transform.GetComponent<Player>();
         if (col.gameObject.tag == "Player")
         {
             player.setHP(player.getHP() - DMG);
         }
         else if (col.gameObject.tag == "FurBall")
         {
-            HP -= DMG;
+            HP -= player.getDMG();
         }
     }
+    public void DetectDif(int ID)
+    {
+        switch (ID)
+        {
+            case 0:
+                HP = 25;
+                DMG = 10;
+                SPD = 2f;
+                break;
+            case 1:
+                HP = 50;
+                DMG = 20;
+                SPD = 2.5f;
+                break;
+            case 2:
+                HP = 100;
+                DMG = 40;
+                SPD = 3f;
+                break;
+        }
+    }
+
 }

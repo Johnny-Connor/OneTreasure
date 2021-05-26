@@ -23,7 +23,7 @@ public class levelUI : MonoBehaviour
 
     void Start()
     {
-
+        difficultyHealthBar();
     }
 
     void Update()
@@ -56,4 +56,21 @@ public class levelUI : MonoBehaviour
         yield return new WaitForSeconds(10);
         SceneManager.LoadScene("mainMenu");
     }
+
+    public void difficultyHealthBar()
+    {
+        switch (PlayerPrefs.GetInt("dif"))
+        {
+            case 0:
+                bossHealth.maxValue = boss.getHP();
+                break;
+            case 1:
+                bossHealth.maxValue = boss.getHP();
+                break;
+            case 2:
+                bossHealth.maxValue = boss.getHP();
+                break;
+        }
+    }
+
 }

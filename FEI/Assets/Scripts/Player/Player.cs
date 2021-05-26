@@ -8,11 +8,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Sprite defeatSprite;
     [SerializeField]
-    private int HP = 100;
+    private int HP;
     [SerializeField]
-    private int DMG = 10;
+    private int DMG;
     [SerializeField]
-    private float SPD = 3;
+    private float SPD;
     [SerializeField]
     private float fireRate = 0.35f;
     [SerializeField]
@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        cheatsCheck();
     }
 
     void Update()
@@ -59,6 +60,7 @@ public class Player : MonoBehaviour
     {
         HP = value;
     }
+
     public int getDMG()
     {
         return DMG;
@@ -145,6 +147,34 @@ public class Player : MonoBehaviour
         if (HP <= 0)
         {
             StartCoroutine(defeat());
+        }
+    }
+
+    public void cheatsCheck()
+    {
+        if (PlayerPrefs.GetInt("HPCheat") != 1)
+        {
+            HP = 100;
+        }
+        else
+        {
+            HP = 2147483647;
+        }
+        if (PlayerPrefs.GetInt("DMGCheat") != 1)
+        {
+            DMG = 20;
+        }
+        else
+        {
+            DMG = 2147483647;
+        }
+        if (PlayerPrefs.GetInt("SPDCheat") != 1)
+        {
+            SPD = 3;
+        }
+        else
+        {
+            SPD = 9;
         }
     }
 
