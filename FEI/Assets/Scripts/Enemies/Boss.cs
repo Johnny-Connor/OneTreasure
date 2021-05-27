@@ -47,7 +47,6 @@ public class Boss : MonoBehaviour
 
     public IEnumerator teleport()
     {
-        Debug.Log("range");
         int x = Random.Range(1, 4);
         switch (x)
         {
@@ -64,9 +63,7 @@ public class Boss : MonoBehaviour
                 transform.position = new Vector2(-51.7f, 42.3f);
                 break;
         }
-        Debug.Log("wait for");
         yield return new WaitForSeconds(teleportTime);
-        Debug.Log("waited");
     }
 
     public float getHP()
