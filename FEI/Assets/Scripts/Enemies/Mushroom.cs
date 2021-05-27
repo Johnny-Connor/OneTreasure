@@ -5,9 +5,9 @@ using UnityEngine;
 public class Mushroom : MonoBehaviour
 {
     [SerializeField]
-    private int HP;
+    private float HP;
     [SerializeField]
-    private int DMG;
+    private float DMG;
     [SerializeField]
     private float SPD;
     [SerializeField]
@@ -25,18 +25,23 @@ public class Mushroom : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        Chase();
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "FurBall")
+        {
+            HP -= player.getDMG();
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D col)
     {
         //Player player = col.transform.GetComponent<Player>();
         if (col.gameObject.tag == "Player")
         {
             player.setHP(player.getHP() - DMG);
-        }
-        else if (col.gameObject.tag == "FurBall")
-        {
-            HP -= player.getDMG();
         }
     }
 
@@ -46,19 +51,27 @@ public class Mushroom : MonoBehaviour
         {
             case 0:
                 HP = 50;
-                DMG = 5;
-                SPD = 1.5f;
+                DMG = 0.2f;
+                SPD = 2f;
                 break;
             case 1:
                 HP = 100;
-                DMG = 10;
+                DMG = 0.4f;
                 SPD = 2.5f;
                 break;
             case 2:
-                HP = 200;
-                DMG = 20;
-                SPD = 3f;
+                HP = 150;
+                DMG = 0.6f;
+                SPD = 2.7f;
                 break;
+        }
+    }
+
+    public void Chase()
+    {
+        if (Vector2.Distance(transform.position, player.GetComponent<Transform>().position) < 5)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player.GetComponent<Transform>().position, SPD * Time.deltaTime);
         }
     }
 

@@ -8,9 +8,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Sprite defeatSprite;
     [SerializeField]
-    private int HP;
+    private float HP;
     [SerializeField]
-    private int DMG;
+    private float DMG;
     [SerializeField]
     private float SPD;
     [SerializeField]
@@ -51,17 +51,17 @@ public class Player : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    public int getHP()
+    public float getHP()
     {
         return HP;
     }
 
-    public void setHP(int value)
+    public void setHP(float value)
     {
         HP = value;
     }
 
-    public int getDMG()
+    public float getDMG()
     {
         return DMG;
     }
@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            HP = 2147483647;
+            HP = Mathf.Infinity;
         }
         if (PlayerPrefs.GetInt("DMGCheat") != 1)
         {
@@ -166,7 +166,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            DMG = 2147483647;
+            DMG = Mathf.Infinity;
         }
         if (PlayerPrefs.GetInt("SPDCheat") != 1)
         {
