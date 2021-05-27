@@ -105,7 +105,7 @@ public class Boss : MonoBehaviour
             case 2:
                 HP = 750;
                 DMG = 1.5f;
-                SPD = 2.5f;
+                SPD = 2.1f;
                 break;
         }
     }

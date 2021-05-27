@@ -107,10 +107,8 @@ public class Player : MonoBehaviour
                 animator.SetInteger("Direction", 0);
                 lastDir = new Vector2(0, -1);
             }
-
             dir.Normalize();
             animator.SetBool("IsMoving", dir.magnitude > 0);
-
             GetComponent<Rigidbody2D>().velocity = SPD * dir;
         }
     }
